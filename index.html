@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Management System</title>
+</head>
+<body>
+  <h1>Task Management System</h1>
+  <script>
+    // 1. Task Management System
+
+    // Task array to hold all tasks
+    let tasks = [];
+
+    // 2. Function to add a task
+    function addTask(taskName) {
+      // Check if the task name is not empty
+      if (taskName.trim() === "") {
+        console.log("Task name cannot be empty.");
+        return;
+      }
+      // Add the task to the task array, with a completed flag set to false
+      tasks.push({ name: taskName, completed: false });
+      console.log(`Task added: "${taskName}"`);
+    }
+
+    // 3. Function to remove a task by index
+    function removeTask(index) {
+      // Check if the index is valid
+      if (index < 0 || index >= tasks.length) {
+        console.log("Invalid task index.");
+        return;
+      }
+      // Remove the task from the array
+      const removedTask = tasks.splice(index, 1);
+      console.log(`Task removed: "${removedTask[0].name}"`);
+    }
+
+    // 4. Function to mark a task as completed by index
+    function markTaskAsComplete(index) {
+      // Check if the index is valid
+      if (index < 0 || index >= tasks.length) {
+        console.log("Invalid task index.");
+        return;
+      }
+      // Mark the task as completed
+      tasks[index].completed = true;
+      console.log(`Task "${tasks[index].name}" marked as completed.`);
+    }
+
+    // 5. Function to display all tasks
+    function showAllTasks() {
+      if (tasks.length === 0) {
+        console.log("No tasks available.");
+        return;
+      }
+      console.log("All Tasks:");
+      tasks.forEach((task, index) => {
+        console.log(`${index + 1}. ${task.name} [${task.completed ? "Completed" : "Not Completed"}]`);
+      });
+    }
+
+    // 6. Function to display only pending tasks
+    function showPendingTasks() {
+      const pendingTasks = tasks.filter(task => !task.completed);
+      if (pendingTasks.length === 0) {
+        console.log("No pending tasks.");
+        return;
+      }
+      console.log("Pending Tasks:");
+      pendingTasks.forEach((task, index) => {
+        console.log(`${index + 1}. ${task.name} [Not Completed]`);
+      });
+    }
+
+    // 7. Function to display only completed tasks
+    function showCompletedTasks() {
+      const completedTasks = tasks.filter(task => task.completed);
+      if (completedTasks.length === 0) {
+        console.log("No completed tasks.");
+        return;
+      }
+      console.log("Completed Tasks:");
+      completedTasks.forEach((task, index) => {
+        console.log(`${index + 1}. ${task.name} [Completed]`);
+      });
+    }
+
+    // Example usage:
+    addTask("Finish homework");
+    addTask("Wash dishes");
+    showAllTasks(); 
+    markTaskAsComplete(0);
+    showPendingTasks();
+    showCompletedTasks();
+    removeTask(1);
+    showAllTasks();
+  </script>
+</body>
+</html>
